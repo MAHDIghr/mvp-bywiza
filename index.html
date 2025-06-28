@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bywiza - Commandes de gâteaux et traiteur pour vos événements</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div class="loading-screen animate__animated animate__fadeOut">
+        <div class="logo-container animate__animated animate__bounceIn">
+            <img src="bywizalogo.png" alt="Bywiza Logo" class="logo">
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="form-header">
+            <img src="bywizalogo.png" alt="Bywiza Logo" class="header-logo">
+            <h1>Votre commande Bywiza</h1>
+            <p>Remplissez ce formulaire pour passer votre commande de gâteaux et services traiteur</p>
+        </header>
+
+        <form id="bywizaForm" class="form-steps">
+            <!-- Étape 1: Type de commande -->
+            <div class="form-step active" data-step="1">
+                <h2>Type de commande</h2>
+                <div class="form-group command-type-group">
+                    <div class="command-option">
+                        <input type="radio" id="big-order" name="command-type" value="big" required>
+                        <label for="big-order" class="card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h3>Fête/Événement</h3>
+                                    <p>Commande importante pour mariage, anniversaire, etc.</p>
+                                </div>
+                                <div class="card-back">
+                                    <p>Gâteaux et traiteur pour 20+ personnes</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="command-option">
+                        <input type="radio" id="small-order" name="command-type" value="small" required>
+                        <label for="small-order" class="card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h3>Petite commande</h3>
+                                    <p>Pour des occasions plus intimes</p>
+                                </div>
+                                <div class="card-back">
+                                    <p>Gâteaux pour moins de 20 personnes</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="command-option">
+                        <input type="radio" id="event-org" name="command-type" value="event" required>
+                        <label for="event-org" class="card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h3>Organisation d'événement</h3>
+                                    <p>Service complet traiteur et gâteaux</p>
+                                </div>
+                                <div class="card-back">
+                                    <p>Nous nous occupons de tout pour votre événement</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="error-message" id="command-type-error"></div>
+                <button type="button" class="btn next-step" data-next="2">Suivant</button>
+            </div>
+
+            <!-- Étape 2: Informations client -->
+            <div class="form-step" data-step="2">
+                <h2>Informations client</h2>
+                
+                <div class="form-group">
+                    <label for="client-type">Vous êtes :</label>
+                    <select id="client-type" name="client-type" required class="select-style">
+                        <option value="" disabled selected>Sélectionnez...</option>
+                        <option value="particular">Particulier</option>
+                        <option value="professional">Professionnel</option>
+                    </select>
+                    <div class="error-message" id="client-type-error"></div>
+                </div>
+                
+                <div class="form-group" id="particular-fields" style="display:none;">
+                    <div class="input-group">
+                        <input type="text" id="lastname" name="lastname" placeholder="Nom" class="input-field">
+                        <div class="error-message" id="lastname-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="firstname" name="firstname" placeholder="Prénom" class="input-field">
+                        <div class="error-message" id="firstname-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="professional-fields" style="display:none;">
+                    <div class="input-group">
+                        <input type="text" id="company" name="company" placeholder="Nom de l'entreprise" class="input-field">
+                        <div class="error-message" id="company-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Téléphone" class="input-field">
+                        <div class="error-message" id="phone-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="email" id="email" name="email" placeholder="Email" class="input-field">
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="delivery-address-fields">
+                    <h3>Adresse de livraison</h3>
+                    <div class="input-group">
+                        <select id="street-type" name="street-type" class="select-style">
+                            <option value="" disabled selected>Nature de la voie</option>
+                            <option value="rue">Rue</option>
+                            <option value="avenue">Avenue</option>
+                            <option value="boulevard">Boulevard</option>
+                            <option value="impasse">Impasse</option>
+                            <option value="allée">Allée</option>
+                            <option value="chemin">Chemin</option>
+                            <option value="route">Route</option>
+                            <option value="place">Place</option>
+                        </select>
+                        <div class="error-message" id="street-type-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="street-number" name="street-number" placeholder="Numéro de voie" class="input-field">
+                        <div class="error-message" id="street-number-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="street-name" name="street-name" placeholder="Nom de la voie" class="input-field">
+                        <div class="error-message" id="street-name-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="postal-code" name="postal-code" placeholder="Code postal" class="input-field">
+                        <div class="error-message" id="postal-code-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="city" name="city" placeholder="Ville" class="input-field" disabled>
+                        <div class="error-message" id="city-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="event-address-fields" style="display:none;">
+                    <h3>Adresse de l'événement</h3>
+                    <div class="input-group">
+                        <select id="event-street-type" name="event-street-type" class="select-style">
+                            <option value="" disabled selected>Nature de la voie</option>
+                            <option value="rue">Rue</option>
+                            <option value="avenue">Avenue</option>
+                            <option value="boulevard">Boulevard</option>
+                            <option value="impasse">Impasse</option>
+                            <option value="allée">Allée</option>
+                            <option value="chemin">Chemin</option>
+                            <option value="route">Route</option>
+                            <option value="place">Place</option>
+                        </select>
+                        <div class="error-message" id="event-street-type-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="event-street-number" name="event-street-number" placeholder="Numéro de voie" class="input-field">
+                        <div class="error-message" id="event-street-number-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="event-street-name" name="event-street-name" placeholder="Nom de la voie" class="input-field">
+                        <div class="error-message" id="event-street-name-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="event-postal-code" name="event-postal-code" placeholder="Code postal" class="input-field">
+                        <div class="error-message" id="event-postal-code-error"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="event-city" name="event-city" placeholder="Ville" class="input-field" disabled>
+                        <div class="error-message" id="event-city-error"></div>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn prev-step" data-prev="1">Précédent</button>
+                    <button type="button" class="btn next-step" data-next="3">Suivant</button>
+                </div>
+            </div>
+
+            <!-- Étape 3: Détails de la commande -->
+            <div class="form-step" data-step="3">
+                <h2>Détails de votre commande</h2>
+                
+                <div class="form-group">
+                    <h3>Type de produits souhaités</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="cakes" name="products" value="cakes">
+                            <label for="cakes" class="checkbox-label">
+                                <span class="checkbox-custom"></span>
+                                Gâteaux
+                            </label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="savory" name="products" value="savory">
+                            <label for="savory" class="checkbox-label">
+                                <span class="checkbox-custom"></span>
+                                Petites salées
+                            </label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="traditional" name="products" value="traditional">
+                            <label for="traditional" class="checkbox-label">
+                                <span class="checkbox-custom"></span>
+                                Plats traditionnels
+                            </label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="all-products" name="products" value="all">
+                            <label for="all-products" class="checkbox-label">
+                                <span class="checkbox-custom"></span>
+                                Les trois options
+                            </label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="products-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="people-count">Nombre de personnes :</label>
+                        <input type="number" id="people-count" name="people-count" min="1" class="input-field" required>
+                        <div class="error-message" id="people-count-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="event-date">Date de l'événement :</label>
+                        <input type="date" id="event-date" name="event-date" class="input-field" required>
+                        <div class="error-message" id="event-date-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="comments">Informations complémentaires :</label>
+                        <textarea id="comments" name="comments" rows="4" class="input-field" placeholder="Thème, allergies, préférences..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn prev-step" data-prev="2">Précédent</button>
+                    <button type="submit" class="btn submit-btn">Envoyer la commande</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <div class="modal-header">
+                <img src="bywizalogo.png" alt="Bywiza Logo" class="modal-logo">
+                <h2>Merci pour votre commande !</h2>
+            </div>
+            <div class="modal-body">
+                <p>Votre demande a bien été envoyée. Nous vous contacterons dans les plus brefs délais pour confirmer les détails.</p>
+                <div class="confirmation-details" id="confirmationDetails"></div>
+            </div>
+            <button class="btn modal-close-btn" id="modalCloseBtn">Fermer</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

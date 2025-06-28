@@ -1,0 +1,572 @@
+/* Variables de couleur */
+:root {
+    --rose-poudree: #F8C8DC;
+    --doree: #D4AF37;
+    --biege: #F5F5DC;
+    --doree-fonce: #B8860B;
+    --rose-fonce: #E75480;
+    --texte-fonce: #333333;
+    --texte-clair: #FFFFFF;
+    --gris-clair: #F0F0F0;
+    --gris-moyen: #CCCCCC;
+    --gris-fonce: #666666;
+}
+
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--biege);
+    color: var(--texte-fonce);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Écran de chargement */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--rose-poudree), var(--biege));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation-delay: 2s;
+}
+
+.logo-container {
+    text-align: center;
+    animation-delay: 0.5s;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.7));
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards 2.5s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* En-tête du formulaire */
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.header-logo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+    transition: transform 0.5s ease;
+}
+
+.header-logo:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+.form-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--doree);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.form-header p {
+    color: var(--gris-fonce);
+    font-size: 1.1rem;
+}
+
+/* Étapes du formulaire */
+.form-steps {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.form-step {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.form-step.active {
+    display: block;
+}
+
+.form-step h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--doree-fonce);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    position: relative;
+    display: inline-block;
+}
+
+.form-step h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, var(--doree), var(--rose-poudree));
+    border-radius: 3px;
+}
+
+/* Groupes de formulaire */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--rose-fonce);
+}
+
+.input-group {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+/* Styles des inputs */
+.input-field {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--gris-moyen);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.input-field:focus {
+    border-color: var(--doree);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.input-field:hover {
+    border-color: var(--rose-poudree);
+}
+
+/* Styles des selects */
+.select-style {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--gris-moyen);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.select-style:focus {
+    border-color: var(--doree);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    outline: none;
+}
+
+/* Options de commande */
+.command-type-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.command-option input[type="radio"] {
+    display: none;
+}
+
+.command-option label {
+    display: block;
+    cursor: pointer;
+    height: 100%;
+}
+
+.card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 200, 220, 0.3));
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    min-height: 180px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    padding: 1rem;
+}
+
+.command-option input[type="radio"]:checked + label .card {
+    background: linear-gradient(135deg, var(--rose-poudree), var(--doree));
+    color: var(--texte-clair);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+    transform: translateY(-5px);
+}
+
+.command-option input[type="radio"]:checked + label .card-inner {
+    transform: rotateY(180deg);
+}
+
+.command-option input[type="radio"]:checked + label .card h3 {
+    color: var(--texte-clair);
+}
+
+.command-option .card h3 {
+    color: var(--doree-fonce);
+    margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.command-option .card p {
+    color: var(--gris-fonce);
+    font-size: 0.9rem;
+}
+
+.command-option input[type="radio"]:checked + label .card p {
+    color: var(--texte-clair);
+}
+
+/* Checkbox styles */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.checkbox-option {
+    position: relative;
+}
+
+.checkbox-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--gris-moyen);
+}
+
+.checkbox-label:hover {
+    border-color: var(--rose-poudree);
+}
+
+.checkbox-custom {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gris-moyen);
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-label {
+    background-color: var(--rose-poudree);
+    border-color: var(--doree);
+    color: var(--texte-clair);
+}
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-label .checkbox-custom {
+    background-color: var(--doree);
+    border-color: var(--doree);
+}
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-label .checkbox-custom::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Boutons */
+.btn {
+    background: linear-gradient(to right, var(--doree), var(--doree-fonce));
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover::after {
+    left: 100%;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.next-step {
+    float: right;
+}
+
+.prev-step {
+    background: linear-gradient(to right, var(--gris-fonce), var(--gris-moyen));
+    margin-right: 10px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    clear: both;
+}
+
+.submit-btn {
+    background: linear-gradient(to right, var(--rose-fonce), var(--rose-poudree));
+}
+
+/* Messages d'erreur */
+.error-message {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: none;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.input-field.error {
+    border-color: #e74c3c;
+    animation: pulseError 0.5s;
+}
+
+@keyframes pulseError {
+    0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+/* Modal de confirmation */
+.confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 200, 220, 0.7));
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+.modal-header {
+    margin-bottom: 1.5rem;
+}
+
+.modal-logo {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+}
+
+.modal-body p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--texte-fonce);
+}
+
+.confirmation-details {
+    text-align: left;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    border-left: 4px solid var(--doree);
+}
+
+.modal-close-btn {
+    margin-top: 1rem;
+    background: linear-gradient(to right, var(--doree), var(--doree-fonce));
+}
+
+/* Animations personnalisées */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .form-header h1 {
+        font-size: 2rem;
+    }
+    
+    .command-type-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-step {
+        padding: 1.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .prev-step, .next-step, .submit-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .prev-step {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .form-step h2 {
+        font-size: 1.5rem;
+    }
+    
+    .input-field, .select-style {
+        padding: 10px 12px;
+    }
+    
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
