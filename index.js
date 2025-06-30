@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
             formStep.classList.remove('active');
             if (parseInt(formStep.dataset.step) === step) {
                 formStep.classList.add('active');
-                // Animation pour l'étape active
                 formStep.style.animation = 'fadeIn 0.5s ease-out';
             }
         });
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 document.getElementById('command-type-error').style.display = 'none';
                 
-                // Afficher les champs d'adresse appropriés
                 const deliveryFields = document.getElementById('delivery-address-fields');
                 const eventFields = document.getElementById('event-address-fields');
                 
@@ -77,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 document.getElementById('client-type-error').style.display = 'none';
                 
-                // Afficher les champs appropriés
                 const particularFields = document.getElementById('particular-fields');
                 const professionalFields = document.getElementById('professional-fields');
                 
@@ -128,14 +125,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Validation téléphone
             const phone = document.getElementById('phone');
-            const phoneRegex = /^[0-9]{10}$/;
+            const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
             if (!phone.value.trim()) {
                 document.getElementById('phone-error').textContent = 'Veuillez entrer votre numéro de téléphone';
                 document.getElementById('phone-error').style.display = 'block';
                 phone.classList.add('error');
                 isValid = false;
             } else if (!phoneRegex.test(phone.value.trim())) {
-                document.getElementById('phone-error').textContent = 'Veuillez entrer un numéro de téléphone valide (10 chiffres)';
+                document.getElementById('phone-error').textContent = 'Veuillez entrer un numéro de téléphone valide (ex: 0612345678 ou +33612345678)';
                 document.getElementById('phone-error').style.display = 'block';
                 phone.classList.add('error');
                 isValid = false;
@@ -216,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById(`${addressFields}postal-code-error`).style.display = 'none';
                 postalCode.classList.remove('error');
                 
-                // Si le code postal est valide, on peut essayer de remplir automatiquement la ville
                 if (postalCode.value.trim().length === 5) {
                     fetchCityFromPostalCode(postalCode.value.trim(), city);
                 }
@@ -285,7 +281,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Récupération automatique de la ville depuis le code postal
     function fetchCityFromPostalCode(postalCode, cityField) {
-        // Utilisation de l'API gouvernementale française pour les codes postaux
         fetch(`https://apicarto.ign.fr/api/codes-postaux/communes/${postalCode}`)
             .then(response => {
                 if (!response.ok) throw new Error('Code postal non trouvé');
@@ -337,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         if (validateStep(currentStep)) {
-            // Préparation des données
+            // Préparation des données pour l'affichage
             const formData = {
                 commandType: document.querySelector('input[name="command-type"]:checked').value,
                 clientType: document.getElementById('client-type').value,
@@ -385,8 +380,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Affichage des données dans la modal de confirmation
             displayConfirmationDetails(formData);
             
-            // Envoi des données par email (simulation)
-            sendFormData(formData);
+            // Envoi du formulaire via Formsubmit
+            this.submit();
             
             // Affichage de la modal de confirmation
             document.getElementById('confirmationModal').style.display = 'flex';
@@ -425,19 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Détails commande
         html += `<h4>Détails de la commande</h4>`;
         
-        let productsText = '';
-        if (formData.orderDetails.products.includes('all')) {
-            productsText = 'Gâteaux, petites salées et plats traditionnels';
-        } else {
-            productsText = formData.orderDetails.products.map(p => {
-                switch(p) {
-                    case 'cakes': return 'Gâteaux';
-                    case 'savory': return 'Petites salées';
-                    case 'traditional': return 'Plats traditionnels';
-                    default: return p;
-                }
-            }).join(', ');
-        }
+        let productsText = formData.orderDetails.products.join(', ');
         html += `<p><strong>Produits:</strong> ${productsText}</p>`;
         html += `<p><strong>Nombre de personnes:</strong> ${formData.orderDetails.peopleCount}</p>`;
         
@@ -449,17 +432,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         confirmationDetails.innerHTML = html;
-    }
-
-    // Fonction pour envoyer les données (simulation)
-    function sendFormData(formData) {
-        // Dans une vraie implémentation, vous utiliseriez un service comme Formspree, EmailJS ou un backend
-        console.log('Données du formulaire à envoyer:', formData);
-        
-        // Simulation d'envoi réussi
-        setTimeout(() => {
-            console.log('Données envoyées à socialmedia.bywiza@gmail.com');
-        }, 1000);
     }
 
     // Fermeture de la modal
@@ -474,15 +446,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('professional-fields').style.display = 'none';
         document.getElementById('event-address-fields').style.display = 'none';
         document.getElementById('delivery-address-fields').style.display = 'block';
-    });
-
-    // Animation du logo au survol
-    const logo = document.querySelector('.header-logo');
-    logo.addEventListener('mouseover', () => {
-        logo.style.transform = 'rotate(5deg) scale(1.05)';
-    });
-    logo.addEventListener('mouseout', () => {
-        logo.style.transform = 'rotate(0) scale(1)';
     });
 
     // Initialisation

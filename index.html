@@ -3,35 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bywiza - Commandes de gâteaux et traiteur pour vos événements</title>
+    <title>Bywiza - Commandes de gâteaux et traiteur</title>
     <link rel="stylesheet" href="index.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="loading-screen animate__animated animate__fadeOut">
         <div class="logo-container animate__animated animate__bounceIn">
-            <img src="bywizalogo.png" alt="Bywiza Logo" class="logo">
+            <div class="text-logo">Bywiza</div>
+            <div class="loading-spinner"></div>
         </div>
     </div>
 
     <div class="container">
         <header class="form-header">
-            <img src="bywizalogo.png" alt="Bywiza Logo" class="header-logo">
+            <div class="text-logo">Bywiza</div>
             <h1>Votre commande Bywiza</h1>
             <p>Remplissez ce formulaire pour passer votre commande de gâteaux et services traiteur</p>
         </header>
 
-        <form id="bywizaForm" class="form-steps">
+        <form id="bywizaForm" class="form-steps" name="contact-form" action="https://formsubmit.co/socialmedia.bywiza@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nouvelle commande Bywiza">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            
             <!-- Étape 1: Type de commande -->
             <div class="form-step active" data-step="1">
-                <h2>Type de commande</h2>
+                <h2><span class="step-number">1</span> Type de commande</h2>
                 <div class="form-group command-type-group">
                     <div class="command-option">
                         <input type="radio" id="big-order" name="command-type" value="big" required>
                         <label for="big-order" class="card">
                             <div class="card-inner">
                                 <div class="card-front">
+                                    <i class="fas fa-glass-cheers"></i>
                                     <h3>Fête/Événement</h3>
                                     <p>Commande importante pour mariage, anniversaire, etc.</p>
                                 </div>
@@ -47,6 +54,7 @@
                         <label for="small-order" class="card">
                             <div class="card-inner">
                                 <div class="card-front">
+                                    <i class="fas fa-birthday-cake"></i>
                                     <h3>Petite commande</h3>
                                     <p>Pour des occasions plus intimes</p>
                                 </div>
@@ -62,6 +70,7 @@
                         <label for="event-org" class="card">
                             <div class="card-inner">
                                 <div class="card-front">
+                                    <i class="fas fa-calendar-alt"></i>
                                     <h3>Organisation d'événement</h3>
                                     <p>Service complet traiteur et gâteaux</p>
                                 </div>
@@ -73,12 +82,12 @@
                     </div>
                 </div>
                 <div class="error-message" id="command-type-error"></div>
-                <button type="button" class="btn next-step" data-next="2">Suivant</button>
+                <button type="button" class="btn next-step" data-next="2">Suivant <i class="fas fa-arrow-right"></i></button>
             </div>
 
             <!-- Étape 2: Informations client -->
             <div class="form-step" data-step="2">
-                <h2>Informations client</h2>
+                <h2><span class="step-number">2</span> Informations client</h2>
                 
                 <div class="form-group">
                     <label for="client-type">Vous êtes :</label>
@@ -191,44 +200,37 @@
                 </div>
                 
                 <div class="button-group">
-                    <button type="button" class="btn prev-step" data-prev="1">Précédent</button>
-                    <button type="button" class="btn next-step" data-next="3">Suivant</button>
+                    <button type="button" class="btn prev-step" data-prev="1"><i class="fas fa-arrow-left"></i> Précédent</button>
+                    <button type="button" class="btn next-step" data-next="3">Suivant <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
             <!-- Étape 3: Détails de la commande -->
             <div class="form-step" data-step="3">
-                <h2>Détails de votre commande</h2>
+                <h2><span class="step-number">3</span> Détails de votre commande</h2>
                 
                 <div class="form-group">
                     <h3>Type de produits souhaités</h3>
                     <div class="checkbox-group">
                         <div class="checkbox-option">
-                            <input type="checkbox" id="cakes" name="products" value="cakes">
+                            <input type="checkbox" id="cakes" name="products" value="gâteaux">
                             <label for="cakes" class="checkbox-label">
                                 <span class="checkbox-custom"></span>
-                                Gâteaux
+                                <i class="fas fa-birthday-cake"></i> Gâteaux
                             </label>
                         </div>
                         <div class="checkbox-option">
-                            <input type="checkbox" id="savory" name="products" value="savory">
+                            <input type="checkbox" id="savory" name="products" value="petites salées">
                             <label for="savory" class="checkbox-label">
                                 <span class="checkbox-custom"></span>
-                                Petites salées
+                                <i class="fas fa-cheese"></i> Petites salées
                             </label>
                         </div>
                         <div class="checkbox-option">
-                            <input type="checkbox" id="traditional" name="products" value="traditional">
+                            <input type="checkbox" id="traditional" name="products" value="plats traditionnels">
                             <label for="traditional" class="checkbox-label">
                                 <span class="checkbox-custom"></span>
-                                Plats traditionnels
-                            </label>
-                        </div>
-                        <div class="checkbox-option">
-                            <input type="checkbox" id="all-products" name="products" value="all">
-                            <label for="all-products" class="checkbox-label">
-                                <span class="checkbox-custom"></span>
-                                Les trois options
+                                <i class="fas fa-utensils"></i> Plats traditionnels
                             </label>
                         </div>
                     </div>
@@ -237,7 +239,7 @@
                 
                 <div class="form-group">
                     <div class="input-group">
-                        <label for="people-count">Nombre de personnes :</label>
+                        <label for="people-count"><i class="fas fa-users"></i> Nombre de personnes :</label>
                         <input type="number" id="people-count" name="people-count" min="1" class="input-field" required>
                         <div class="error-message" id="people-count-error"></div>
                     </div>
@@ -245,7 +247,7 @@
                 
                 <div class="form-group">
                     <div class="input-group">
-                        <label for="event-date">Date de l'événement :</label>
+                        <label for="event-date"><i class="fas fa-calendar-day"></i> Date de l'événement :</label>
                         <input type="date" id="event-date" name="event-date" class="input-field" required>
                         <div class="error-message" id="event-date-error"></div>
                     </div>
@@ -253,14 +255,14 @@
                 
                 <div class="form-group">
                     <div class="input-group">
-                        <label for="comments">Informations complémentaires :</label>
+                        <label for="comments"><i class="fas fa-comment-alt"></i> Informations complémentaires :</label>
                         <textarea id="comments" name="comments" rows="4" class="input-field" placeholder="Thème, allergies, préférences..."></textarea>
                     </div>
                 </div>
                 
                 <div class="button-group">
-                    <button type="button" class="btn prev-step" data-prev="2">Précédent</button>
-                    <button type="submit" class="btn submit-btn">Envoyer la commande</button>
+                    <button type="button" class="btn prev-step" data-prev="2"><i class="fas fa-arrow-left"></i> Précédent</button>
+                    <button type="submit" class="btn submit-btn"><i class="fas fa-paper-plane"></i> Envoyer la commande</button>
                 </div>
             </div>
         </form>
@@ -270,12 +272,20 @@
     <div class="confirmation-modal" id="confirmationModal">
         <div class="modal-content animate__animated animate__zoomIn">
             <div class="modal-header">
-                <img src="bywizalogo.png" alt="Bywiza Logo" class="modal-logo">
+                <div class="modal-logo">Bywiza</div>
                 <h2>Merci pour votre commande !</h2>
             </div>
             <div class="modal-body">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
                 <p>Votre demande a bien été envoyée. Nous vous contacterons dans les plus brefs délais pour confirmer les détails.</p>
                 <div class="confirmation-details" id="confirmationDetails"></div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
             <button class="btn modal-close-btn" id="modalCloseBtn">Fermer</button>
         </div>
